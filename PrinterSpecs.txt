@@ -1,0 +1,18 @@
+Stepper motors: 17h185h-04a
+
+Model No	Rated Voltage	Current /Phase	Resistance /Phase	Inductance /Phase	Holding Torque			#Of Leads
+17H185H-04A	2.8				1.68			1.65				2.8					62 Oz/In 	4.4Kg/cm	4
+
+
+
+I_TripMax is good up until 1.68
+	Eq: I_TripMax = Vref * 8 * Rs (0.1 Ohm for Chinese Polulu)
+ 
+  I_TripMax = Vref * 8 * 0.1
+  I_TripMax < 1.68 (that's our max). Let's aim for 1A.
+
+  1 = Vref * 0.8
+  Vref = 1/0.8 = 1.25 V
+
+  //Date: 25/11/2016 set all pots to ~1.22 V
+  
