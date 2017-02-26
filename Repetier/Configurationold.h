@@ -36,7 +36,7 @@
 
 */
 
-#define NUM_EXTRUDER 1
+#define NUM_EXTRUDER 2
 #define MOTHERBOARD 37
 #include "pins.h"
 
@@ -46,6 +46,7 @@
 #undef FAN_BOARD_PIN
 #define FAN_BOARD_PIN -1
 #define BOARD_FAN_SPEED 255
+#define BOARD_FAN_MIN_SPEED 0
 #define FAN_THERMO_PIN -1
 #define FAN_THERMO_MIN_PWM 128
 #define FAN_THERMO_MAX_PWM 255
@@ -118,6 +119,46 @@
 #define EXT0_DECOUPLE_TEST_PERIOD 12000
 #define EXT0_JAM_PIN -1
 #define EXT0_JAM_PULLUP 0
+#define EXT1_X_OFFSET 0
+#define EXT1_Y_OFFSET 0
+#define EXT1_Z_OFFSET 0
+#define EXT1_STEPS_PER_MM 95
+#define EXT1_TEMPSENSOR_TYPE 1
+#define EXT1_TEMPSENSOR_PIN TEMP_2_PIN
+#define EXT1_HEATER_PIN HEATER_2_PIN
+#define EXT1_STEP_PIN ORIG_E1_STEP_PIN
+#define EXT1_DIR_PIN ORIG_E1_DIR_PIN
+#define EXT1_INVERSE 0
+#define EXT1_ENABLE_PIN ORIG_E1_ENABLE_PIN
+#define EXT1_ENABLE_ON 0
+#define EXT1_MIRROR_STEPPER 0
+#define EXT1_STEP2_PIN ORIG_E1_STEP_PIN
+#define EXT1_DIR2_PIN ORIG_E1_DIR_PIN
+#define EXT1_INVERSE2 0
+#define EXT1_ENABLE2_PIN ORIG_E1_ENABLE_PIN
+#define EXT1_MAX_FEEDRATE 50
+#define EXT1_MAX_START_FEEDRATE 20
+#define EXT1_MAX_ACCELERATION 1000
+#define EXT1_HEAT_MANAGER 3
+#define EXT1_WATCHPERIOD 1
+#define EXT1_PID_INTEGRAL_DRIVE_MAX 230
+#define EXT1_PID_INTEGRAL_DRIVE_MIN 40
+#define EXT1_PID_PGAIN_OR_DEAD_TIME 7
+#define EXT1_PID_I 2
+#define EXT1_PID_D 40
+#define EXT1_PID_MAX 255
+#define EXT1_ADVANCE_K 0
+#define EXT1_ADVANCE_L 0
+#define EXT1_ADVANCE_BACKLASH_STEPS 0
+#define EXT1_WAIT_RETRACT_TEMP 150
+#define EXT1_WAIT_RETRACT_UNITS 0
+#define EXT1_SELECT_COMMANDS ""
+#define EXT1_DESELECT_COMMANDS ""
+#define EXT1_EXTRUDER_COOLER_PIN -1
+#define EXT1_EXTRUDER_COOLER_SPEED 255
+#define EXT1_DECOUPLE_TEST_PERIOD 12000
+#define EXT1_JAM_PIN -1
+#define EXT1_JAM_PULLUP 0
 
 #define FEATURE_RETRACTION 1
 #define AUTORETRACT_ENABLED 0
@@ -134,6 +175,7 @@
 #define FILAMENTCHANGE_REHOME 1
 #define FILAMENTCHANGE_SHORTRETRACT 5
 #define FILAMENTCHANGE_LONGRETRACT 50
+#define JAM_METHOD 1
 #define JAM_STEPS 220
 #define JAM_SLOWDOWN_STEPS 320
 #define JAM_SLOWDOWN_TO 70
@@ -178,6 +220,7 @@
 #define MAXTEMP 260
 #define MIN_DEFECT_TEMPERATURE 2
 #define MAX_DEFECT_TEMPERATURE 290
+#define MILLISECONDS_PREHEAT_TIME 30000
 
 // ##########################################################################################
 // ##                             Laser configuration                                      ##
@@ -188,7 +231,7 @@ If the firmware is in laser mode, it can control a laser output to cut or engrav
 Please use this feature only if you know about safety and required protection. Lasers are
 dangerous and can hurt or make you blind!!!
 
-The default laser driver only supports laser on and off. Here you control the eíntensity with
+The default laser driver only supports laser on and off. Here you control the intensity with
 your feedrate. For exchangeable diode lasers this is normally enough. If you need more control
 you can set the intensity in a range 0-255 with a custom extension to the driver. See driver.h
 and comments on how to extend the functions non invasive with our event system.
@@ -230,6 +273,7 @@ It also can add a delay to wait for spindle to run on full speed.
 
 // ################ Endstop configuration #####################
 
+#define MULTI_ZENDSTOP_HOMING 0
 #define ENDSTOP_PULLUP_X_MIN true
 #define ENDSTOP_X_MIN_INVERTING false
 #define MIN_HARDWARE_ENDSTOP_X true
@@ -239,6 +283,9 @@ It also can add a delay to wait for spindle to run on full speed.
 #define ENDSTOP_PULLUP_Z_MIN true
 #define ENDSTOP_Z_MIN_INVERTING false
 #define MIN_HARDWARE_ENDSTOP_Z true
+#define ENDSTOP_PULLUP_Z2_MINMAX true
+#define ENDSTOP_Z2_MINMAX_INVERTING false
+#define MINMAX_HARDWARE_ENDSTOP_Z2 false
 #define ENDSTOP_PULLUP_X_MAX true
 #define ENDSTOP_X_MAX_INVERTING false
 #define MAX_HARDWARE_ENDSTOP_X false
@@ -256,6 +303,9 @@ It also can add a delay to wait for spindle to run on full speed.
 #define max_software_endstop_x true
 #define max_software_endstop_y true
 #define max_software_endstop_z true
+#define DOOR_PIN -1
+#define DOOR_PULLUP 1
+#define DOOR_INVERTING 1
 #define ENDSTOP_X_BACK_MOVE 5
 #define ENDSTOP_Y_BACK_MOVE 5
 #define ENDSTOP_Z_BACK_MOVE 2
@@ -266,6 +316,9 @@ It also can add a delay to wait for spindle to run on full speed.
 #define ENDSTOP_Y_BACK_ON_HOME 1
 #define ENDSTOP_Z_BACK_ON_HOME 0
 #define ALWAYS_CHECK_ENDSTOPS 1
+#define MOVE_X_WHEN_HOMED 0
+#define MOVE_Y_WHEN_HOMED 0
+#define MOVE_Z_WHEN_HOMED 0
 
 // ################# XYZ movements ###################
 
@@ -288,6 +341,8 @@ It also can add a delay to wait for spindle to run on full speed.
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
 #define Z_MIN_POS 0
+#define Z2_MINMAX_PIN -1
+
 #define DISTORTION_CORRECTION 0
 #define DISTORTION_CORRECTION_POINTS 5
 #define DISTORTION_CORRECTION_R 100
@@ -371,6 +426,10 @@ It also can add a delay to wait for spindle to run on full speed.
 #define Z3_STEP_PIN   ORIG_E2_STEP_PIN
 #define Z3_DIR_PIN    ORIG_E2_DIR_PIN
 #define Z3_ENABLE_PIN ORIG_E2_ENABLE_PIN
+#define FEATURE_FOUR_ZSTEPPER 0
+#define Z4_STEP_PIN   ORIG_E3_STEP_PIN
+#define Z4_DIR_PIN    ORIG_E3_DIR_PIN
+#define Z4_ENABLE_PIN ORIG_E3_ENABLE_PIN
 #define FEATURE_DITTO_PRINTING 0
 #define USE_ADVANCE 0
 #define ENABLE_QUADRATIC_ADVANCE 0
@@ -383,6 +442,7 @@ It also can add a delay to wait for spindle to run on full speed.
 #define POWER_INVERTING 0
 #define KILL_METHOD 1
 #define ACK_WITH_LINENUMBER 1
+#define KEEP_ALIVE_INTERVAL 2000
 #define WAITING_IDENTIFIER "wait"
 #define ECHO_ON_EXECUTE 1
 #define EEPROM_MODE 1
@@ -416,6 +476,7 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define Z_PROBE_Z_OFFSET_MODE 1
 #define UI_BED_COATING 1
 #define FEATURE_Z_PROBE 1
+#define EXTRUDER_IS_Z_PROBE 0
 #define Z_PROBE_BED_DISTANCE 10
 #define Z_PROBE_PIN ORIG_Z_MAX_PIN
 #define Z_PROBE_PULLUP 0
@@ -432,7 +493,7 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define Z_PROBE_FINISHED_SCRIPT ""
 #define Z_PROBE_REQUIRES_HEATING 0
 #define Z_PROBE_MIN_TEMPERATURE 150
-#define FEATURE_AUTOLEVEL 0
+#define FEATURE_AUTOLEVEL 1
 #define Z_PROBE_X1 20
 #define Z_PROBE_Y1 20
 #define Z_PROBE_X2 160
@@ -488,7 +549,6 @@ WARNING: Servos can draw a considerable amount of current. Make sure your system
 #define UI_PRINTER_NAME "Xheis3D"
 #define UI_PRINTER_COMPANY ""
 #define UI_PAGES_DURATION 4000
-#define UI_ANIMATION 0
 #define UI_SPEEDDEPENDENT_POSITIONING 0
 #define UI_DISABLE_AUTO_PAGESWITCH 0
 #define UI_AUTORETURN_TO_MENU_AFTER 40000
@@ -535,7 +595,6 @@ Values must be in range 1..255
 //Date: 25/11/2016 fixed inverted y direction, and tweaked deault Jerk and Acceleration on all axes.
 //Date: 25/11/2016 using old configuration. First attempt at tuning.
 //Date: 11/11/2016 using online form
-//Date: 25/2/2017 Back to 1 extruder. Sad!
 
 #endif
 
@@ -610,6 +669,59 @@ Values must be in range 1..255
                 "step": "ORIG_E0_STEP_PIN",
                 "dir": "ORIG_E0_DIR_PIN",
                 "enable": "ORIG_E0_ENABLE_PIN"
+            }
+        },
+        {
+            "id": 1,
+            "heatManager": 3,
+            "pidDriveMin": 40,
+            "pidDriveMax": 230,
+            "pidMax": 255,
+            "sensorType": 1,
+            "sensorPin": "TEMP_2_PIN",
+            "heaterPin": "HEATER_2_PIN",
+            "maxFeedrate": 50,
+            "startFeedrate": 20,
+            "invert": "0",
+            "invertEnable": "0",
+            "acceleration": 1000,
+            "watchPeriod": 1,
+            "pidP": 7,
+            "pidI": 2,
+            "pidD": 40,
+            "advanceK": 0,
+            "advanceL": 0,
+            "waitRetractTemp": 150,
+            "waitRetractUnits": 0,
+            "waitRetract": 0,
+            "stepsPerMM": 95,
+            "coolerPin": -1,
+            "coolerSpeed": 255,
+            "selectCommands": "",
+            "deselectCommands": "",
+            "xOffset": 0,
+            "yOffset": 0,
+            "zOffset": 0,
+            "xOffsetSteps": 0,
+            "yOffsetSteps": 0,
+            "zOffsetSteps": 0,
+            "stepper": {
+                "name": "Extruder 1",
+                "step": "ORIG_E1_STEP_PIN",
+                "dir": "ORIG_E1_DIR_PIN",
+                "enable": "ORIG_E1_ENABLE_PIN"
+            },
+            "advanceBacklashSteps": 0,
+            "decoupleTestPeriod": 12,
+            "jamPin": -1,
+            "jamPullup": "0",
+            "mirror": "0",
+            "invert2": "0",
+            "stepper2": {
+                "name": "Extruder 1",
+                "step": "ORIG_E1_STEP_PIN",
+                "dir": "ORIG_E1_DIR_PIN",
+                "enable": "ORIG_E1_ENABLE_PIN"
             }
         }
     ],
@@ -741,6 +853,13 @@ Values must be in range 1..255
         "dir": "ORIG_E2_DIR_PIN",
         "enable": "ORIG_E2_ENABLE_PIN"
     },
+    "mirrorZ4": "0",
+    "mirrorZ4Motor": {
+        "name": "Extruder 3",
+        "step": "ORIG_E3_STEP_PIN",
+        "dir": "ORIG_E3_DIR_PIN",
+        "enable": "ORIG_E3_ENABLE_PIN"
+    },
     "dittoPrinting": "0",
     "featureServos": "0",
     "servo0Pin": 11,
@@ -756,7 +875,7 @@ Values must be in range 1..255
     "uiPrinterName": "Xheis3D",
     "uiPrinterCompany": "",
     "uiPagesDuration": 4000,
-    "uiAnimation": "0",
+    "uiHeadline": "",
     "uiDisablePageswitch": "0",
     "uiAutoReturnAfter": 40000,
     "featureKeys": "0",
@@ -869,7 +988,7 @@ Values must be in range 1..255
     "zProbeHeight": 40,
     "zProbeStartScript": "",
     "zProbeFinishedScript": "",
-    "featureAutolevel": "0",
+    "featureAutolevel": "1",
     "zProbeX1": 20,
     "zProbeY1": 20,
     "zProbeX2": 160,
@@ -955,6 +1074,7 @@ Values must be in range 1..255
     "jamErrorSteps": 500,
     "jamMinSteps": 10,
     "jamAction": 1,
+    "jamMethod": 1,
     "primaryPort": 0,
     "numMotorDrivers": 0,
     "motorDrivers": [
@@ -1025,7 +1145,7 @@ Values must be in range 1..255
             "enablePin": -1
         }
     ],
-    "manualConfig": "\/\/Update Log: \n\/\/Date: 25\/11\/2016 Upped MAX Z SPEED & Z TRAVEL SPEED.\n\/\/Old Updates;\n\/\/Date: 25\/11\/2016 reverted z to 2560, but fixed MAX Z SPEED being smaller then Z TRAVEL SPEED.\n\/\/Date: 25\/11\/2016 Inverted x,z endstops. Up'd Z steps, installed z-min endstop again and mapped auto z probe to z-max.\n\/\/Date: 25\/11\/2016 Inverted y endstop\n\/\/Date: 25\/11\/2016 fixed inverted y direction, and tweaked deault Jerk and Acceleration on all axes.\n\/\/Date: 25\/11\/2016 using old configuration. First attempt at tuning.\n\/\/Date: 11\/11\/2016 using online form\n\/\/Date: 25\/2\/2017 Back to 1 extruder. Sad!",
+    "manualConfig": "\/\/Update Log: \n\/\/Date: 25\/11\/2016 Upped MAX Z SPEED & Z TRAVEL SPEED.\n\/\/Old Updates;\n\/\/Date: 25\/11\/2016 reverted z to 2560, but fixed MAX Z SPEED being smaller then Z TRAVEL SPEED.\n\/\/Date: 25\/11\/2016 Inverted x,z endstops. Up'd Z steps, installed z-min endstop again and mapped auto z probe to z-max.\n\/\/Date: 25\/11\/2016 Inverted y endstop\n\/\/Date: 25\/11\/2016 fixed inverted y direction, and tweaked deault Jerk and Acceleration on all axes.\n\/\/Date: 25\/11\/2016 using old configuration. First attempt at tuning.\n\/\/Date: 11\/11\/2016 using online form",
     "zHomeMinTemperature": 0,
     "zHomeXPos": 999999,
     "zHomeYPos": 999999,
@@ -1082,15 +1202,6 @@ Values must be in range 1..255
     "extruderSwitchXYSpeed": 100,
     "dualXAxis": "0",
     "boardFanSpeed": 255,
-    "mirrorZ4": "0",
-    "mirrorZ4Motor": {
-        "name": "Extruder 3",
-        "step": "ORIG_E3_STEP_PIN",
-        "dir": "ORIG_E3_DIR_PIN",
-        "enable": "ORIG_E3_ENABLE_PIN"
-    },
-    "uiHeadline": "",
-    "jamMethod": 1,
     "keepAliveInterval": 2000,
     "moveXWhenHomed": "0",
     "moveYWhenHomed": "0",
@@ -1103,6 +1214,7 @@ Values must be in range 1..255
     "boardFanMinSpeed": 0,
     "doorPin": -1,
     "doorEndstop": 1,
+    "uiAnimation": "0",
     "hasMAX6675": false,
     "hasMAX31855": false,
     "hasGeneric1": false,
@@ -1111,8 +1223,8 @@ Values must be in range 1..255
     "hasUser0": false,
     "hasUser1": false,
     "hasUser2": false,
-    "numExtruder": 1,
-    "version": 92.9,
+    "numExtruder": 2,
+    "version": 100,
     "primaryPortName": ""
 }
 ========== End configuration string ==========

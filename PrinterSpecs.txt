@@ -14,5 +14,8 @@ I_TripMax is good up until 1.68
   1 = Vref * 0.8
   Vref = 1/0.8 = 1.25 V
 
-  //Date: 25/11/2016 set all pots to ~1.22 V
-  
+//Date: 25/11/2016 set all pots to ~1.22 V
+
+
+
+//Date: 25/11/2016 set EXT2 pot to ~0.95 V  
